@@ -1,5 +1,7 @@
 # KuCoin RT Detection Tool
 
+> ** Notice** This tool currently supports **Add/Cancel Order WebSocket domains only**. Support for Public Push and Private Push domains is under active development — stay tuned for upcoming updates.
+
 ## Quick Start
 
 ### Step 1: Get the Files
