@@ -178,12 +178,20 @@ class WebSocketLatencyMeasurer:
             self.config['secret'] = getpass.getpass("Enter API Secret: ").strip()
             self.config['passphrase'] = getpass.getpass("Enter Passphrase: ").strip()
         print("\nEnter domains to test (one per line, empty line to finish):")
+        print("Note: Currently only Add/Cancel Order domains are supported.")
         domains = []
         while True:
-            domain = input().strip()
+            domain = input("Domain: ").strip()
             if not domain:
                 break
-            domains.append(domain)
+            # Confirm if it's an Add/Cancel Order domain (default: y)
+            confirm = input(f"Is '{domain}' an Add/Cancel Order domain? (y/n, default y): ").strip().lower() or 'y'
+            if confirm != 'n':
+                domains.append(domain)
+                print(f"  ✓ Added: {domain}")
+            else:
+                print("  ✗ Skipped. Currently only Add/Cancel Order domains are supported.")
+                print("     Please enter an Add/Cancel Order domain or press Enter to finish.")
         if is_retry and not domains:
             prev_domains = self.config.get('domains', [])
             if not prev_domains:
